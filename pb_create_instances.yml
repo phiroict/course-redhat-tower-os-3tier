@@ -1,0 +1,9 @@
+---
+  - name: Create instances
+    hosts: all
+    become: no
+    gather_facts: False
+    vars_files:
+    - vars_infrastructure.yml
+    roles:
+    - {role: create-instances}

@@ -1,0 +1,62 @@
+---
+  infrastructure:
+    app1:
+      metadata:
+        group: apps
+        deployment_name: QA
+      flavor: m2.small
+      keypair: ansible_ssh
+      networks:
+        public: 10.10.10.0/24
+        private: 20.20.20.0/24
+      image: rhel-guest
+      security_groups: "app_security"
+      ports_open:
+        - "8080/tcp"
+        - "22/tcp"
+        - "icmp"
+    app2:
+      metadata:
+        group: apps
+        deployment_name: QA
+      flavor: m2.small
+      keypair: ansible_ssh
+      networks:
+        public: 10.10.10.0/24
+        private: 20.20.20.0/24
+      image: rhel-guest
+      security_groups: "app_security"
+      ports_open:
+        - "8080/tcp"
+        - "22/tcp"
+        - "icmp"
+    database:
+      metadata:
+        group: appdbs
+        deployment_name: QA
+      flavor: m2.small
+      keypair: ansible_ssh
+      networks:
+        public: 10.10.10.0/24
+        private: 20.20.20.0/24
+      image: rhel-guest
+      security_groups: "db_servers"
+      ports_open:
+        - "5432/tcp"
+        - "22/tcp"
+        - "icmp"
+    frontend:
+      metadata:
+        group: frontends
+        deployment_name: QA
+      flavor: m2.small
+      keypair: ansible_ssh
+      networks:
+        public: 10.10.10.0/24
+        private: 20.20.20.0/24
+      image: rhel-guest
+      security_groups: "frontend_servers"
+      ports_open:
+        - "80/tcp"
+        - "22/tcp"
+        - "icmp"

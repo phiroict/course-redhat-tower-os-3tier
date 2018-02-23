@@ -1,0 +1,9 @@
+---
+  - name: Setup security
+    hosts: all
+    become: no
+    gather_facts: False
+    vars_files:
+    - vars_security.yml
+    roles:
+    - {role: infrastructure-security}

@@ -1,0 +1,14 @@
+---
+  - name: Provision workstation
+    hosts: localhost
+    become: yes
+    tasks:
+      - name: Copy Remote-To-Remote (from serverA to serverB)
+        synchronize:
+          src: /etc/yum.repos.d/open.repo
+          dest: /etc/yum.repos.d/open.repo
+        delegate_to: ctrl-{{ guid }}.rhpds.opentlc.com
+      - name: Install openshift artefacts
+        yum:
+          name: python-openstackclient
+          state: present

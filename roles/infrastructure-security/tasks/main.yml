@@ -1,0 +1,49 @@
+---
+  - name: Create security group for os
+    os_security_group:
+      cloud: ospcloud
+      state: present
+      name: app_security
+      description: security group for app servers
+
+  - os_security_group_rule:
+      cloud: ospcloud
+      security_group: app_security
+      protocol: tcp
+      port_range_min: "{{ item.port }}"
+      port_range_max: "{{ item.port }}"
+      remote_ip_prefix: "{{ item.ip_prefix }}"
+    with_items:
+      "{{ security_groups.app_security }}"
+
+  - os_security_group:
+      cloud: ospcloud
+      state: present
+      name: frontend_servers
+      description: ports_open
+
+  - os_security_group_rule:
+      cloud: ospcloud
+      security_group: frontend_servers
+      protocol: tcp
+      port_range_min: "{{ item.port }}"
+      port_range_max: "{{ item.port }}"
+      remote_ip_prefix: "{{ item.ip_prefix }}"
+    with_items:
+      "{{ security_groups.frontend_servers }}"
+
+  - os_security_group:
+      cloud: ospcloud
+      state: present
+      name: db_servers
+      description: ports_open
+
+  - os_security_group_rule:
+      cloud: ospcloud
+      security_group: db_servers
+      protocol: tcp
+      port_range_min: "{{ item.port }}"
+      port_range_max: "{{ item.port }}"
+      remote_ip_prefix: "{{ item.ip_prefix }}"
+    with_items:
+      "{{ security_groups.db_servers }}"

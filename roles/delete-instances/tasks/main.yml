@@ -1,0 +1,7 @@
+---
+  - name: delete instances
+    os_server:
+      cloud: ospcloud
+      name: "{{ item.key }}"
+      state: absent
+    with_dict: "{{ infrastructure }}"

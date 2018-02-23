@@ -1,0 +1,7 @@
+---
+  - name: Create instances
+    hosts: all
+    become: no
+    gather_facts: yes
+    roles:
+    - {role: osp-facts}

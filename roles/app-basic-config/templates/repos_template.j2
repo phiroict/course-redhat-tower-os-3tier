@@ -1,0 +1,32 @@
+[rhel-7-server-rpms]
+name=Red Hat Enterprise Linux 7
+baseurl={{ rhel_rpms_url }}
+enabled=1
+gpgcheck=0
+
+[rhel-7-server-rh-common-rpms]
+name=Red Hat Enterprise Linux 7 Common
+baseurl={{ rhel_rpms_common_url }}
+enabled=1
+gpgcheck=0
+
+[rhel-7-server-extras-rpms]
+name=Red Hat Enterprise Linux 7 Extras
+baseurl={{ rhel_rpms_extras_url }}
+enabled=1
+gpgcheck=0
+
+[rhel-7-server-optional-rpms]
+name=Red Hat Enterprise Linux 7 Optional
+baseurl={{ rhel_rpms_optional_url }}
+enabled=1
+gpgcheck=0
+
+[epel]
+name=Extra Packages for Enterprise Linux 7 - $basearch
+baseurl={{ rhel_epel_url }}
+mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=epel-7&arch=$basearch
+failovermethod=priority
+enabled=1
+gpgcheck=0
+#gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7

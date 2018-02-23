@@ -1,0 +1,34 @@
+---
+
+- hosts: jumpbox
+  gather_facts: true
+  roles:
+  - name: osp-facts
+# Setup front-end load balancer tier
+
+
+- name: setup load-balancer tier
+  hosts: frontends
+  become: yes
+  roles:
+    - {name: app-basic-config, tags: app-basic-config}
+    - {name: app-loadbalancer, tags: [lbs, haproxy]}
+
+# Setup application servers tier
+
+- name: setup app tier
+  hosts: apps
+  become: yes
+  gather_facts: false
+  roles:
+    - {name: app-basic-config, tags: app-basic-config}
+    - {name: app-apps, tags: [apps, tomcat]}
+
+# Setup database tier
+
+- name: setup database tier
+  become: yes
+  hosts: appdbs
+  roles:
+    - {name: app-basic-config, tags: app-basic-config}
+    - {name: app-appdb, tags: [dbs, postgres]}

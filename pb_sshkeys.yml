@@ -1,0 +1,6 @@
+- name: Create ssh key and upload
+  hosts: localhost
+  become: no
+  gather_facts: true
+  roles:
+    - {role: infrastructure-keys }

@@ -1,0 +1,31 @@
+---
+  - name: Create networks
+    os_network:
+      cloud: ospcloud
+      state: present
+      name: "{{ item.value.networkname }}"
+      external: "{{ item.value.external }}"
+    with_dict: "{{ networks }}"
+  - name: Create subnets
+    os_subnet:
+      state: present
+      network_name: "{{ item.value.networkname }}"
+      name: "{{ item.value.name }}"
+      cidr: "{{ item.value.cidr }}"
+      dns_nameservers:
+         "{{ item.value.nameservers }}"
+      host_routes:
+        "{{ item.value.routes }}"
+    with_dict: "{{ networks }}"
+
+
+  - name: Set up the actual router to communicate with the world
+    os_router:
+      cloud: ospcloud
+      state: present
+      name: gateway_router
+      network: ext_network
+      external_fixed_ips:
+        - subnet: public
+      interfaces:
+        - private
