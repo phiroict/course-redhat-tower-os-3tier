@@ -1,0 +1,8 @@
+---
+  - name: Test to see where this is running
+    hosts: all
+    become: no
+    tasks:
+      - name: Where am I running.
+        debug:
+          msg: "This is host: {{ inventory_host ]} at {{ ansible_all_ipv4_addresses }}"
