@@ -1,0 +1,11 @@
+{
+    "company_name": "Red Hat Internal",
+    "contact_email": "ber@redhat.com",
+    "contact_name": "Jon Bersuder",
+    "instance_count": 40,
+    "license_date": 1522555200,
+    "license_key": "140d562b35ec356de3cda5207ba4741281fef469d14d25ec45af520224972acf",
+    "license_type": "enterprise",
+    "subscription_name": "Ansible Tower by Red Hat, Standard (40 Managed Nodes)",
+    "trial": false
+}
