@@ -1,5 +1,10 @@
 - hosts: jumpbox
   tasks:
+  - name: Remove an old one first
+    os_nova_flavor:
+     cloud: ospcloud
+     state: absent
+     name: m2.small
   - name: Create m2.small flavor
     os_nova_flavor:
      cloud: ospcloud

@@ -1,0 +1,22 @@
+---
+  - name: Install AT database
+    hosts: database
+    become: yes
+    gather_facts: no
+    tasks:
+      - name: Update postgres config
+        lineinfile:
+          line: "include_dir = 'conf.d'"
+          path: /var/lib/pgsql/9.6/data/postgresql.conf
+      - name: Create data directory
+        file:
+          path: /var/lib/pgsql/9.6/data/conf.d
+          state: directory
+      - name: Copy over config file
+        copy:
+          src: tower-postgresql.conf
+          dest: /var/lib/pgsql/9.6/data/conf.d/tower-postgresql.conf
+      - name: Let postgres listen to slave
+        lineinfile:
+          line: 'host    replication replica     0.0.0.0/0        md5'
+          path: /var/lib/pgsql/9.6/data/pg_hba.conf

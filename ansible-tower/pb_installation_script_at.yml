@@ -1,0 +1,38 @@
+---
+  - name: Install the installation scripts for ansible and configure database
+    hosts: jumphost
+    become: yes
+    gather_facts: False
+    tasks:
+      - name: Get installation script
+        unarchive:
+          src: https://releases.ansible.com/ansible-tower/setup/ansible-tower-setup-latest.tar.gz
+          dest: /root/
+          remote_src: yes
+        creates: /root/ansible-tower-setup-3.2.3
+      - name: Get the folder name of the installation
+        find:
+          paths: /root
+          patterns: 'ansible-tower-setup-*'
+          file_type: directory
+        register: find_result
+      - name:
+        debug:
+          msg: "results are {{ find_result.files[0].path }}"
+      - name: Copy over inventory file
+        template:
+          src: ./hosts_tower
+          dest: "{{ find_result.files[0].path }}/inventory"
+          backup: yes
+      - name: Execute installation
+        shell: bash setup.sh
+        args:
+          chdir: "{{ find_result.files[0].path }}"
+      - name: Copy over the private key that AT is using
+        copy:
+          src: ~/.ssh/openstack.pem
+          dest: /root/.ssh/openstack.pem
+          owner: root
+          group: root
+          mode: 0400
+
