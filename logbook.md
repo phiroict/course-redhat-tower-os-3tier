@@ -35,7 +35,7 @@ And a openstack instance as well : 1db6                    Three tier project.
 ## Server stack
 ### Ansible tower stack
 Notes:
-The keys need to be in the /var/lib/awx/SSH (openstack.pem) in there manually.
+The keys need to be in the /var/lib/awx/.ssh (openstack.pem) in there manually.
 Also, you need to have the ssh.cfg and the ansible.cfg in the root of the project, nowhere else.
 
 
@@ -119,7 +119,7 @@ By script
 
 
 Connect to it by:
-https://tower1.765c.example.opentlc.com/#/home
+https://tower1.e270.example.opentlc.com/#/home
 Test: Ok.
 
 ## Provision Openstack environment.
