@@ -5,4 +5,4 @@
     tasks:
       - name: Where am I running.
         debug:
-          msg: "This is host: {{ inventory_hostname}} at {{ ansible_all_ipv4_addresses }}"
+          msg: "This is host: {{ ansible_all_ipv4_addresses }}"
